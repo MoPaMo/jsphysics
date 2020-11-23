@@ -30,7 +30,7 @@ let platform = Matter.Bodies.rectangle(1200, 500, 300, 20, { isStatic: true });
   });
 });*/
 let stack = Matter.Composites.pyramid(1075, 270, 5, 5, 2, 0, function(x, y) {
-  return Matter.Bodies.rectangle(x, y, 30, 30, {
+  return Matter.Bodies.circle(x, y, 30,{
     render: {
       fillStyle: "white",
       strokeStyle: "white",
@@ -40,7 +40,7 @@ let stack = Matter.Composites.pyramid(1075, 270, 5, 5, 2, 0, function(x, y) {
 })
 //(xx, yy, columns, rows, columnGap, rowGap, callback)
 //let stack = Matter.Composites.car(1300, 270, 300, 20, 100)
-let stopper = Matter.Bodies.circle(0, 0, 20, { isStatic: true });
+let stopper = Matter.Bodies.circle(300, 700, 2, { isStatic: true });
 let ball = Matter.Bodies.circle(300, 600, 20); //firing ball
 let sling = Matter.Constraint.create({
   pointA: { x: 300, y: 600 },
