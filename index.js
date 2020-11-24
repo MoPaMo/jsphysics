@@ -74,6 +74,10 @@ Matter.Events.on(engine, "afterUpdate", function () {
   }
   for (bAll of BallArray) {
     Matter.Body.scale(bAll, 0.999, 0.999);
+    if(bAll.r<4){
+      Matter.World.remove(engine.world,bAll);
+      
+    }
   }
 });
 Matter.World.add(engine.world, [
