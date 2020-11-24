@@ -68,12 +68,12 @@ Matter.Events.on(engine, "afterUpdate", function () {
       sling.bodyB = ball;
     }, 1000);
     setTimeout(function () {
-      BallArray.push(ball2)
+      BallArray.push(ball2);
     }, 3000);
     firing = false;
   }
-  for(bAll of BallArray){
-    Matter.Body.scale(bAll, 0.999, 0.999)
+  for (bAll of BallArray) {
+    Matter.Body.scale(bAll, 0.999, 0.999);
   }
 });
 Matter.World.add(engine.world, [
