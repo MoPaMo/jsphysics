@@ -6,3 +6,6 @@ body,
 html {
   background-color: rgb(24, 24, 29);
 }
+svg{
+  display: none;
+}

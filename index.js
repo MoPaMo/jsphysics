@@ -18,17 +18,27 @@ let mouseConstraint = Matter.MouseConstraint.create(engine, {
   },
 });
 render.mouse = mouse;
-//hi=Matter.Svg.pathToVertices("sleigh.svg",[15])
+const bodies = [
+  ...[...document.querySelectorAll("svg > path")].map((path) => {
+    const body = Matter.Bodies.fromVertices(
+      100,
+      80,
+      Matter.Svg.pathToVertices(path),
+      {
+        render: {
+          sprite: {
+           // texture: "images/white.png",
+          },
+        },
+      },
+      true
+    );
+    Matter.Body.scale(body, 0.2, 0.2);
+    return body;
+  }),
+];
 let platform = Matter.Bodies.rectangle(1200, 500, 300, 20, { isStatic: true });
-/*let stack = Matter.Composites.stack(1100, 270, 4, 4, 0, 0, function(x, y) {
-  return Matter.Bodies.polygon(x, y, 8, 30, {
-    render: {
-      fillStyle: "white",
-      strokeStyle: "white",
-      lineWidth: 5
-    }
-  });
-});*/
+
 let stack = Matter.Composites.pyramid(1075, 270, 4, 5, 0, 0, function (x, y) {
   return Matter.Bodies.circle(x, y, 30, {
     render: {
@@ -74,19 +84,16 @@ Matter.Events.on(engine, "afterUpdate", function () {
   }
   for (bAll of BallArray) {
     Matter.Body.scale(bAll, 0.999, 0.999);
-    if(bAll.r<4){
-      Matter.World.remove(engine.world,bAll);
-      
+    if (bAll.r < 4) {
+      Matter.World.remove(engine.world, bAll);
     }
   }
 });
-Matter.World.add(engine.world, [
-  stack,
-  platform,
-  mouseConstraint,
-  ball,
-  sling,
-  stopper,
-]);
+Matter.World.add(
+  engine.world,
+  [stack, platform, mouseConstraint, ball, sling, stopper].concat(bodies)
+);
 Matter.Engine.run(engine);
 Matter.Render.run(render);
+console.log(bodies);
+document.getElementById("Loading").innerHTML = "";
