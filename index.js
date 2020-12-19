@@ -19,7 +19,24 @@ let mouseConstraint = Matter.MouseConstraint.create(engine, {
 });
 render.mouse = mouse;
 const bodies = [
-  ...[...document.querySelectorAll("svg > path")].map((path) => {
+  ...[...document.querySelectorAll("#sleigh > path")].map((path) => {
+    const body = Matter.Bodies.fromVertices(
+      1000,
+      80,
+      Matter.Svg.pathToVertices(path),
+      {
+        render: {
+          sprite: {
+           // texture: "images/white.png",
+          },
+        },
+      },
+      true
+    );
+    Matter.Body.scale(body, 0.2, 0.2);
+    return body;
+  }),
+  ...[...document.querySelectorAll("svg#tree > path")].map((path) => {
     const body = Matter.Bodies.fromVertices(
       100,
       80,
