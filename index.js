@@ -70,6 +70,23 @@ const bodies = [
     Matter.Body.scale(body, 0.2, 0.2);
     return body;
   }),
+  ...[...document.querySelectorAll("#snowman > path")].map((path) => {
+    const body = Matter.Bodies.fromVertices(
+      500,
+      80,
+      Matter.Svg.pathToVertices(path),
+      {
+        render: {
+          fillStyle: "white",
+          strokeStyle: "red",
+          lineWidth: 1,
+        },
+      },
+      true
+    );
+    Matter.Body.scale(body, 0.2, 0.2);
+    return body;
+  }),
   ...[...document.querySelectorAll("#candy > path")].map((path) => {
     const body = Matter.Bodies.fromVertices(
       1000,
@@ -77,9 +94,7 @@ const bodies = [
       Matter.Svg.pathToVertices(path),
       {
         render: {
-          fillStyle: "white",
-          strokeStyle: "red",
-          lineWidth: 0,
+          fillStyle: "red",
         },
       },
       true
@@ -95,8 +110,8 @@ const bodies = [
       {
         render: {
           fillStyle: "green",
-      strokeStyle: "white",
-      lineWidth: 5,
+          strokeStyle: "white",
+          lineWidth: 5,
         },
       },
       true
