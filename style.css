@@ -5,6 +5,7 @@ canvas {
 body,
 html {
   background-color: rgb(24, 24, 29);
+  color: aliceblue;
 }
 svg{
   display: none;
