@@ -18,7 +18,7 @@ let mouseConstraint = Matter.MouseConstraint.create(engine, {
   },
 });
 render.mouse = mouse;
-const bodies = [
+const svgs = [
   ...[...document.querySelectorAll("#sleigh > path")].map((path) => {
     const body = Matter.Bodies.fromVertices(
       1000,
@@ -172,6 +172,7 @@ Matter.Events.on(engine, "afterUpdate", function () {
     }
   }
 });
+var bodies = [svg[0], svg[2]]
 Matter.World.add(
   engine.world,
   [stack, platform, mouseConstraint, ball, sling, stopper].concat(bodies)
