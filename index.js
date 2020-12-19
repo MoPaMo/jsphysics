@@ -1,5 +1,16 @@
 let engine = Matter.Engine.create();
-
+function findGetParameter(parameterName) {
+  var result = null,
+    tmp = [];
+  location.search
+    .substr(1)
+    .split("&")
+    .forEach(function (item) {
+      tmp = item.split("=");
+      if (tmp[0] === parameterName) result = decodeURIComponent(tmp[1]);
+    });
+  return result;
+}
 let render = Matter.Render.create({
   element: document.body,
   engine: engine,
@@ -18,7 +29,7 @@ let mouseConstraint = Matter.MouseConstraint.create(engine, {
   },
 });
 render.mouse = mouse;
-const svgs = [
+const svg = [
   ...[...document.querySelectorAll("#sleigh > path")].map((path) => {
     const body = Matter.Bodies.fromVertices(
       1000,
@@ -120,17 +131,29 @@ const svgs = [
     return body;
   }),
 ];
-let platform = Matter.Bodies.rectangle(1200, 500, 300, 20, { isStatic: true });
 
-let stack = Matter.Composites.pyramid(1075, 270, 4, 5, 0, 0, function (x, y) {
-  return Matter.Bodies.circle(x, y, 30, {
-    render: {
-      fillStyle: "white",
-      strokeStyle: "white",
-      lineWidth: 5,
-    },
-  });
-});
+var platform, bodies;
+//load stages
+switch (findGetParameter("id")) {
+  case 1:
+    var bodies = [svg[0], svg[2]];
+    var platform = Matter.Bodies.rectangle(1200, 500, 300, 20, {
+      isStatic: true,
+    });
+    break;
+  case 2:
+    var bodies = [svg[0], svg[2]];
+    var platform = Matter.Bodies.rectangle(1200, 500, 300, 20, {
+      isStatic: true,
+    });
+    break;
+  default:
+    var bodies = [svg[0], svg[2]];
+    var platform = Matter.Bodies.rectangle(1200, 500, 300, 20, {
+      isStatic: true,
+    });
+    break;
+}
 //(xx, yy, columns, rows, columnGap, rowGap, callback)
 //let stack = Matter.Composites.car(1300, 270, 300, 20, 100)
 let stopper = Matter.Bodies.circle(300, 700, 2, { isStatic: true });
@@ -172,10 +195,10 @@ Matter.Events.on(engine, "afterUpdate", function () {
     }
   }
 });
-var bodies = [svg[0], svg[2]]
+var bodies = [svg[0], svg[2]];
 Matter.World.add(
   engine.world,
-  [stack, platform, mouseConstraint, ball, sling, stopper].concat(bodies)
+  [platform, mouseConstraint, ball, sling, stopper].concat(bodies)
 );
 Matter.Engine.run(engine);
 Matter.Render.run(render);
