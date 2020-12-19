@@ -26,9 +26,60 @@ const bodies = [
       Matter.Svg.pathToVertices(path),
       {
         render: {
-          sprite: {
-           // texture: "images/white.png",
-          },
+          fillStyle: "white",
+          strokeStyle: "red",
+          lineWidth: 1,
+        },
+      },
+      true
+    );
+    Matter.Body.scale(body, 0.2, 0.2);
+    return body;
+  }),
+  ...[...document.querySelectorAll("#igloo > path")].map((path) => {
+    const body = Matter.Bodies.fromVertices(
+      1000,
+      80,
+      Matter.Svg.pathToVertices(path),
+      {
+        render: {
+          fillStyle: "white",
+          strokeStyle: "red",
+          lineWidth: 1,
+        },
+      },
+      true
+    );
+    Matter.Body.scale(body, 0.2, 0.2);
+    return body;
+  }),
+  ...[...document.querySelectorAll("#icles > path")].map((path) => {
+    const body = Matter.Bodies.fromVertices(
+      1000,
+      80,
+      Matter.Svg.pathToVertices(path),
+      {
+        render: {
+          fillStyle: "white",
+          strokeStyle: "red",
+          lineWidth: 1,
+        },
+      },
+      true
+    );
+    Matter.Body.scale(body, 0.2, 0.2);
+    return body;
+  }),
+  ...[...document.querySelectorAll("#candy > path")].map((path) => {
+    const body = Matter.Bodies.fromVertices(
+      1000,
+      80,
+      Matter.Svg.pathToVertices(path),
+      {
+        render: {
+          fillStyle: "white",
+          strokeStyle: "red",
+          lineWidth: 0,
         },
       },
       true
@@ -43,9 +94,9 @@ const bodies = [
       Matter.Svg.pathToVertices(path),
       {
         render: {
-          sprite: {
-           // texture: "images/white.png",
-          },
+          fillStyle: "green",
+      strokeStyle: "white",
+      lineWidth: 5,
         },
       },
       true
